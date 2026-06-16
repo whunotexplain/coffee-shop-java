@@ -1,0 +1,89 @@
+CREATE TABLE users
+(
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE,
+    password_hash VARCHAR(255),
+    role VARCHAR(20)
+);
+
+CREATE TABLE categories
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE products
+(
+    id SERIAL PRIMARY KEY,
+    category_id INTEGER REFERENCES categories(id),
+
+    name VARCHAR(100),
+    description TEXT,
+
+    price NUMERIC(10,2),
+
+    quantity INTEGER DEFAULT 0
+);
+
+CREATE TABLE orders
+(
+    id SERIAL PRIMARY KEY,
+
+    user_id INTEGER REFERENCES users(id),
+
+    total_amount NUMERIC(10,2),
+
+    status VARCHAR(30),
+
+    order_date TIMESTAMP
+    DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE order_items
+(
+    id SERIAL PRIMARY KEY,
+
+    order_id INTEGER REFERENCES orders(id),
+
+    product_id INTEGER REFERENCES products(id),
+
+    quantity INTEGER,
+
+    price NUMERIC(10,2)
+);
+
+CREATE TABLE suppliers
+(
+    id SERIAL PRIMARY KEY,
+
+    name VARCHAR(100),
+
+    phone VARCHAR(30),
+
+    email VARCHAR(100)
+);
+
+CREATE TABLE purchases
+(
+    id SERIAL PRIMARY KEY,
+
+    supplier_id INTEGER REFERENCES suppliers(id),
+
+    total_amount NUMERIC(10,2),
+
+    purchase_date TIMESTAMP
+    DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE purchase_items
+(
+    id SERIAL PRIMARY KEY,
+
+    purchase_id INTEGER REFERENCES purchases(id),
+
+    product_id INTEGER REFERENCES products(id),
+
+    quantity INTEGER,
+
+    cost NUMERIC(10,2)
+);
