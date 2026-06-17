@@ -1,4 +1,8 @@
-CREATE TABLE users
+-- ============================================
+-- СОЗДАНИЕ ТАБЛИЦ
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS users
 (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE,
@@ -6,84 +10,119 @@ CREATE TABLE users
     role VARCHAR(20)
 );
 
-CREATE TABLE categories
+CREATE TABLE IF NOT EXISTS categories
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100)
 );
 
-CREATE TABLE products
+CREATE TABLE IF NOT EXISTS products
 (
     id SERIAL PRIMARY KEY,
     category_id INTEGER REFERENCES categories(id),
-
     name VARCHAR(100),
     description TEXT,
-
     price NUMERIC(10,2),
-
     quantity INTEGER DEFAULT 0
 );
 
-CREATE TABLE orders
+CREATE TABLE IF NOT EXISTS orders
 (
     id SERIAL PRIMARY KEY,
-
     user_id INTEGER REFERENCES users(id),
-
     total_amount NUMERIC(10,2),
-
     status VARCHAR(30),
-
-    order_date TIMESTAMP
-    DEFAULT CURRENT_TIMESTAMP
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE order_items
+CREATE TABLE IF NOT EXISTS order_items
 (
     id SERIAL PRIMARY KEY,
-
     order_id INTEGER REFERENCES orders(id),
-
     product_id INTEGER REFERENCES products(id),
-
     quantity INTEGER,
-
     price NUMERIC(10,2)
 );
 
-CREATE TABLE suppliers
+CREATE TABLE IF NOT EXISTS suppliers
 (
     id SERIAL PRIMARY KEY,
-
     name VARCHAR(100),
-
     phone VARCHAR(30),
-
     email VARCHAR(100)
 );
 
-CREATE TABLE purchases
+CREATE TABLE IF NOT EXISTS purchases
 (
     id SERIAL PRIMARY KEY,
-
     supplier_id INTEGER REFERENCES suppliers(id),
-
     total_amount NUMERIC(10,2),
-
-    purchase_date TIMESTAMP
-    DEFAULT CURRENT_TIMESTAMP
+    purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE purchase_items
+CREATE TABLE IF NOT EXISTS purchase_items
 (
     id SERIAL PRIMARY KEY,
-
     purchase_id INTEGER REFERENCES purchases(id),
-
     product_id INTEGER REFERENCES products(id),
-
     quantity INTEGER,
-
     cost NUMERIC(10,2)
 );
+
+-- ============================================
+-- ДОБАВЛЕНИЕ ТЕСТОВЫХ ДАННЫХ
+-- ============================================
+
+-- Категории
+INSERT INTO categories (name) VALUES
+('Напитки'),
+('Выпечка'),
+('Десерты');
+
+-- Товары
+INSERT INTO products (name, price, category_id) VALUES
+('Кофе американо', 150.0, 1),
+('Капучино', 200.0, 1),
+('Латте', 220.0, 1),
+('Эспрессо', 130.0, 1),
+('Круассан', 120.0, 2),
+('Булочка с корицей', 130.0, 2),
+('Маффин шоколадный', 140.0, 2),
+('Тирамису', 250.0, 3),
+('Чизкейк', 230.0, 3),
+('Медовик', 240.0, 3);
+
+-- Пользователи
+INSERT INTO users (username, password_hash, role) VALUES
+('admin', 'admin', 'ADMIN'),
+('user', 'user', 'USER'),
+('manager', 'manager', 'MANAGER');
+
+-- Поставщики
+INSERT INTO suppliers (name, phone, email) VALUES
+('ООО Кофейный Мир', '+7(495)111-22-33', 'info@coffeeworld.ru'),
+('ООО Свежая Выпечка', '+7(495)222-33-44', 'order@freshbakery.ru'),
+('ИП Десерт-Мастер', '+7(495)333-44-55', 'dessert@master.ru');
+
+-- Закупки (для примера)
+INSERT INTO purchases (supplier_id, total_amount, purchase_date) VALUES
+(1, 15000.0, CURRENT_DATE - INTERVAL '5 days'),
+(2, 8000.0, CURRENT_DATE - INTERVAL '3 days'),
+(3, 12000.0, CURRENT_DATE - INTERVAL '1 day');
+
+-- Позиции закупок
+INSERT INTO purchase_items (purchase_id, product_id, quantity, cost) VALUES
+(1, 1, 50, 100.0),  -- 50 пачек американо по 100
+(1, 2, 40, 120.0),  -- 40 пачек капучино по 120
+(2, 5, 60, 50.0),   -- 60 круассанов по 50
+(3, 8, 30, 150.0),  -- 30 тирамису по 150
+(3, 9, 25, 140.0);  -- 25 чизкейков по 140
+
+-- Добавляем один тестовый заказ (чтобы было что показывать администратору)
+INSERT INTO orders (user_id, total_amount, status, order_date) VALUES
+(2, 350.0, 'CREATED', CURRENT_TIMESTAMP - INTERVAL '1 hour');
+
+INSERT INTO order_items (order_id, product_id, quantity, price) VALUES
+(1, 1, 1, 150.0),  -- 1 американо
+(1, 5, 1, 120.0),  -- 1 круассан
+(1, 8, 1, 80.0);   -- 1 тирамису (со скидкой, например)

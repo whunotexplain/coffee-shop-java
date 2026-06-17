@@ -1,6 +1,6 @@
 package app.database;
 
-import models.Supplier;
+import app.models.Supplier;
 
 import java.sql.*;
 import java.util.ArrayList;

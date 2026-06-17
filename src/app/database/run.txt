@@ -1,0 +1,9 @@
+cp ~/Документы/java_project_cofee/coffee-shop-java/src/app/database/db_script.txt /tmp/
+sudo -u postgres psql -d coffee_shop_java -f /tmp/db_script.txt
+
+^
+|
+copy
+
+чтоб бдшка запустилась
+

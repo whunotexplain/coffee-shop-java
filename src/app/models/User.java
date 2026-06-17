@@ -1,6 +1,6 @@
 package app.models;
 
-import authorization.Role;
+import app.authorization.Role;
 
 public class User {
 

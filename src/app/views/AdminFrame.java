@@ -1,6 +1,6 @@
-package views;
+package app.views;
 
-import controllers.admin.AdminDashboardController;
+import app.controllers.admin.AdminDashboardController;
 
 import javax.swing.*;
 import java.awt.*;

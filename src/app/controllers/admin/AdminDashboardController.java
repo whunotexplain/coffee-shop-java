@@ -1,6 +1,6 @@
 package app.controllers.admin;
 
-import database.DatabaseConnection;
+import app.database.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

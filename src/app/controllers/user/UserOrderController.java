@@ -1,7 +1,7 @@
 package app.controllers.user;
 
-import handlers.OrderHandler;
-import models.CartItem;
+import app.handlers.OrderHandler;
+import app.models.CartItem;
 
 import java.util.List;
 

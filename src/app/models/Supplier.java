@@ -25,4 +25,13 @@ public class Supplier {
     public String getName() {
         return name;
     }
+
+    // ДОБАВЬТЕ ЭТИ МЕТОДЫ:
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }

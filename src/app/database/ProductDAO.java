@@ -1,6 +1,6 @@
 package app.database;
 
-import models.Product;
+import app.models.Product;
 
 import java.sql.*;
 import java.util.ArrayList;

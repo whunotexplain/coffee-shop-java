@@ -1,7 +1,7 @@
 package app.handlers;
 
-import models.CartItem;
-import models.Product;
+import app.models.CartItem;
+import app.models.Product;
 
 import java.util.ArrayList;
 import java.util.List;

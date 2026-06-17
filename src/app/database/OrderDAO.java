@@ -1,6 +1,6 @@
 package app.database;
 
-import models.CartItem;
+import app.models.CartItem;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

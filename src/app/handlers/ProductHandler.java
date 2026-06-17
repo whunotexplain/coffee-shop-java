@@ -1,7 +1,7 @@
 package app.handlers;
 
-import database.ProductDAO;
-import models.Product;
+import app.database.ProductDAO;
+import app.models.Product;
 
 import java.util.List;
 

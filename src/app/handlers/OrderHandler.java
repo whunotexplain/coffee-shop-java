@@ -1,7 +1,7 @@
 package app.handlers;
 
-import database.OrderDAO;
-import models.CartItem;
+import app.database.OrderDAO;
+import app.models.CartItem;
 
 import java.util.List;
 

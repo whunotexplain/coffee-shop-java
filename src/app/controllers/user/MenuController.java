@@ -1,7 +1,7 @@
 package app.controllers.user;
 
-import handlers.ProductHandler;
-import models.Product;
+import app.handlers.ProductHandler;
+import app.models.Product;
 
 import java.util.List;
 

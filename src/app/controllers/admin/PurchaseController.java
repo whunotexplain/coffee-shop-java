@@ -1,6 +1,6 @@
 package app.controllers.admin;
 
-import handlers.PurchaseHandler;
+import app.handlers.PurchaseHandler;
 
 public class PurchaseController {
 

@@ -1,8 +1,9 @@
-package views;
+package app.views;
 
-import authorization.Role;
-import authorization.SessionManager;
-import models.User;
+import app.authorization.Role;
+import app.authorization.SessionManager;
+import app.models.User;
+import app.authorization.AuthService;
 
 import javax.swing.*;
 import java.awt.*;

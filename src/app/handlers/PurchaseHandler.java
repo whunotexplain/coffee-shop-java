@@ -1,6 +1,6 @@
 package app.handlers;
 
-import database.PurchaseDAO;
+import app.database.PurchaseDAO;
 
 public class PurchaseHandler {
 

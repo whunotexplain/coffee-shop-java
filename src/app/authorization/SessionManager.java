@@ -1,6 +1,6 @@
 package app.authorization;
 
-import models.User;
+import app.models.User;
 
 public class SessionManager {
 
